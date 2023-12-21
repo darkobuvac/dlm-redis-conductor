@@ -40,12 +40,6 @@ namespace RedisDistributedLockServer.Handlers
                 )
                 {
                     await @lock.DisposeAsync();
-                    var resource = (string)(await _redisDb.StringGetAsync(request.Resource));
-
-                    if (resource is not null && resource != request.WorkflowId)
-                        throw new InvalidOperationException(
-                            $"Resource: {request.Resource} is locked by different workflow: {resource}."
-                        );
                 }
                 else
                 {
