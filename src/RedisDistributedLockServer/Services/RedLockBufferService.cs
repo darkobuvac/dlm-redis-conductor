@@ -1,5 +1,6 @@
 ﻿using RedisDistributedLockServer.Abstractions;
 using RedLockNet;
+using RedLockNet.SERedis;
 using System.Collections.Concurrent;
 
 namespace RedisDistributedLockServer.Services
@@ -37,6 +38,14 @@ namespace RedisDistributedLockServer.Services
             {
                 await UnlockAsync(lockId);
             }
+        }
+
+        public IRedLock? GetRedLock(string lockId)
+        {
+            if (_buffer.TryGetValue(lockId, out var redLock))
+                return redLock;
+
+            return null;
         }
     }
 }

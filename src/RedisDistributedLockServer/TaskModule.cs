@@ -13,6 +13,7 @@ namespace RedisDistributedLockServer
 
             builder.RegisterWorkerTask<WaitTask.Handler>();
             builder.RegisterWorkerTask<LockResource.Handler>();
+            builder.RegisterWorkerTask<ReleaseLock.Handler>();
             builder.RegisterWorkflow<TestWf>();
         }
     }
